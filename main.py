@@ -1,3 +1,9 @@
+############################################################
+### https://www.youtube.com/watch?v=4LcVypdAveg
+############################################################
+### Author: Satyam Lal
+############################################################
+
 import os
 from kiteconnect import KiteConnect
 import time, json, datetime, sys
@@ -62,8 +68,21 @@ def place_trade(symbol, quantity, direction):
             tradingsymbol = symbol[4:],
             transaction_type = kite.TRANSACTION_TYPE_BUY if direction == "BUY" else kite.TRANSACTION_TYPE_SELL,
             quantity = int(quantity),
-            
+            product = kite.PRODUCT_MIS,
+            order_type = kite.ORDER_TYPE_MARKET,
+            price = 0.0,
+            validity = kite.VALIDITY_DAY,
+            tag = "Trading Via OldSchoolBot"
         )
         return order
     except Exception as e:
         return f"{e}"
+
+def strategy():
+    global ltp, strike_ltp
+    print("----------Algo Started----------")
+    while datetime.datetime.now().time() <= datetime.time(9,16):
+        time.sleep(1)
+    
+    strikes = get_strike(trade_symbol.upper())
+    
